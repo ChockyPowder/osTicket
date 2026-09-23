@@ -15,6 +15,12 @@
 **********************************************************************/
 require('client.inc.php');
 
+// Discord-only portal: send customers to authentication/tickets.
+if (!$thisclient || !$thisclient->isValid() || $thisclient->isGuest())
+    Http::redirect('login.php');
+if ($thisclient && $thisclient->isValid() && !$thisclient->isGuest())
+    Http::redirect('tickets.php');
+
 require_once INCLUDE_DIR . 'class.page.php';
 
 $section = 'home';
