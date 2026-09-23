@@ -14,6 +14,10 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 require('client.inc.php');
+
+// Discord-only portal: guests cannot open tickets.
+if (!$thisclient || !$thisclient->isValid() || $thisclient->isGuest())
+    Http::redirect('login.php');
 define('SOURCE','Web'); //Ticket source.
 $ticket = null;
 $errors=array();
